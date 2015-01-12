@@ -27,7 +27,7 @@ zshexit_functions+=(todo_save)
 function todo_add_task {
     if [[ $# -gt 0 ]] then
       task=$(echo -E "$@" | tr '\n' '\r' | sed -e 's/\r$//' -e 's/\r/\n    /g')
-      task="  - ${fg[${todo_colors[${todo_color_index}]}]}\x1E$task\x1E$fg[default]"
+      task="  - ${fg[${todo_colors[${todo_color_index}]}]}$task$fg[default]"
       todo_tasks+="$task"
       (( todo_color_index %= ${#todo_colors} ))
       (( todo_color_index += 1 ))
@@ -36,7 +36,7 @@ function todo_add_task {
 
 function todo_task_done {
     pattern="$1"
-    todo_tasks[${(M)todo_tasks[(i)*\x1E*${pattern}*\x1E*]}]=()
+    todo_tasks[${(M)todo_tasks[(i)*\[3?m*${pattern}*\[39m*]}]=()
 }
 
 function todo_display {
