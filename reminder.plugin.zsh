@@ -21,8 +21,8 @@ else
 fi
 todo_colors=(red green yellow blue magenta cyan)
 
-precmd_functions+=(todo_display)
-zshexit_functions+=(todo_save)
+add-zsh-hook precmd todo_display
+add-zsh-hook zshexit todo_save
 
 function todo_add_task {
     if [[ $# -gt 0 ]] then
