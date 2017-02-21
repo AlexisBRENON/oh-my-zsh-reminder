@@ -34,3 +34,13 @@ When all tasks are done, reminder vanishes :
     $
     
 That's all for the moment. As I said, very very simple. Maybe will be improved later.
+
+# Installation
+
+To install, clone the repo into `~/.oh-my-zsh/custom/plugins` and add to your list of plugins in `~/.zshrc`.
+
+ZSH plugins don't allow dashes, so make sure you clone it into a single-word folder:
+
+``` bash
+git clone https://github.com/AlexisBRENON/oh-my-zsh-reminder ~/.oh-my-zsh/custom/plugins/reminder
+```
