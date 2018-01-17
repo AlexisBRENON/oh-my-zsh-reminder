@@ -43,14 +43,26 @@ function todo_add_task {
     fi
 }
 
+alias todo=todo_add_task
+
 function todo_task_done {
     pattern="$1"
 	  load_tasks
-    index=${(M)todo_tasks[(i)*${pattern}*]}
+    index=${(M)todo_tasks[(i)${pattern}*]}
     todo_tasks[index]=()
     todo_tasks_colors[index]=()
     todo_save
 }
+
+function _todo_task_done {
+    load_tasks
+    if [[ ${#todo_tasks} -gt 0 ]] then
+      compadd $(echo ${TODO_TASKS} | tr ':' '\n')
+    fi
+  }
+
+compdef _todo_task_done todo_task_done
+alias task_done=todo_task_done
 
 function todo_display {
     load_tasks
@@ -68,5 +80,3 @@ function todo_save {
     echo "$todo_color_index" >> $TODO_SAVE_COLOR_FILE
 }
 
-alias todo=todo_add_task
-alias task_done=todo_task_done
