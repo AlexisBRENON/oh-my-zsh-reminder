@@ -32,7 +32,8 @@ add-zsh-hook precmd todo_display
 
 function todo_add_task {
     if [[ $# -gt 0 ]] then
-      task=$(echo -E "$@" | tr '\n' '\r' | sed -e 's/\r$//' -e 's/\r/\n    /g')
+      # Source: http://stackoverflow.com/a/8997314/1298019
+      task=$(echo -E "$@" | tr '\n' '\000' | sed 's:\x00\x00.*:\n:g' | tr '\000' '\n')
       color="${fg[${todo_colors[${todo_color_index}]}]}"
 	    load_tasks
       todo_tasks+="$task"
