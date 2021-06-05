@@ -1,10 +1,14 @@
 TODO_SAVE_TASKS_FILE="$HOME/.todo.sav"
 TODO_SAVE_COLOR_FILE="$HOME/.todo_color.sav"
 
+# Using '#' because its pretty uncommon to type
+# typeset arrays by default use ':' but that means we can't have iTerm2 clickable URLs!
+TODO_SEP=\#
+
 # Allow to use colors
 colors
-typeset -T -x -g TODO_TASKS todo_tasks
-typeset -T -x -g TODO_TASKS_COLORS todo_tasks_colors
+typeset -T -x -g TODO_TASKS todo_tasks $TODO_SEP
+typeset -T -x -g TODO_TASKS_COLORS todo_tasks_colors $TODO_SEP
 typeset -a -x -g todo_colors
 typeset -i -x -g todo_color_index
 
@@ -58,7 +62,7 @@ function todo_task_done {
 function _todo_task_done {
     load_tasks
     if [[ ${#todo_tasks} -gt 0 ]] then
-      compadd $(echo ${TODO_TASKS} | tr ':' '\n')
+      compadd $(echo ${TODO_TASKS} | tr "$TODO_SEP" '\n')
     fi
   }
 
