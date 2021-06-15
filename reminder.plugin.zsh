@@ -3,7 +3,7 @@ TODO_SAVE_COLOR_FILE="$HOME/.todo_color.sav"
 
 # Using '#' because its pretty uncommon to type
 # typeset arrays by default use ':' but that means we can't have iTerm2 clickable URLs!
-TODO_SEP=\#
+TODO_SEP="${TODO_SEP:-"\#"}"
 
 # Allow to use colors
 colors
@@ -84,4 +84,3 @@ function todo_save {
     echo "$TODO_TASKS_COLORS" > $TODO_SAVE_COLOR_FILE
     echo "$todo_color_index" >> $TODO_SAVE_COLOR_FILE
 }
-
